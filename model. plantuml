@@ -1,0 +1,34 @@
+@startuml
+
+struct EventChannel{
+name
+}
+
+struct Event{
+data
+}
+
+class EventService{
++subscribe()
+-publish()
+-eventLoop()
+}
+
+
+abstract Subscriber{
+#name
++onEvent()
+}
+
+class ConcreteSubscriber{}
+
+Subscriber  <-- ConcreteSubscriber
+
+EventService -- Subscriber: > notifies
+EventService *-- EventService
+EventService *-- "n" EventChannel
+EventService . Event
+Subscriber . Event
+
+
+@endum
