@@ -2,24 +2,32 @@
 #define EVENT_SERVICE_HPP
 #pragma once
 
-#include "NonCopyable.hpp"
+#include "Event.hpp"
+#include <map>
 #include <memory>
+
 
 struct Event;
 struct Token;
+struct Notifier;
 
-class EventService : NonCopyable<EventService>{
+typedef std::string EventChannel;
+
+class EventService{
 private:
   EventService();
 
 private:
   static std::shared_ptr<EventService> instance;
+  std::map<Token, EventHandler> subscribers;
+  Notifier notifier; 
+  std::mutex eventLoopMutex;
 
 public:
-  std::shared_ptr<EventService> get();
+  static std::shared_ptr<EventService> get();
   virtual ~EventService();
-  void publish(const Event &message);
-  Token subscribe();
+  void publish(std::shared_ptr<Event> message);
+  Token subscribe(const EventHandler& handler );
   void unsubscribe(Token token);
 };
 
