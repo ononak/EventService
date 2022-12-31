@@ -1,8 +1,6 @@
 @startuml
 
-struct EventChannel{
-name
-}
+
 
 struct Event{
 data
@@ -10,23 +8,24 @@ data
 
 class EventService{
 +subscribe()
--publish()
--eventLoop()
++unsubscribe()
++publish()
 }
 
 
 abstract Subscriber{
 #name
 +onEvent()
+-subscribe()
+-unsubscribe()
 }
 
 class ConcreteSubscriber{}
 
-Subscriber  <-- ConcreteSubscriber
+Subscriber  <|-- ConcreteSubscriber
 
 EventService -- Subscriber: > notifies
 EventService *-- EventService
-EventService *-- "n" EventChannel
 EventService . Event
 Subscriber . Event
 

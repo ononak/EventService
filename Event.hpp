@@ -4,7 +4,7 @@
 #include <boost/signals2.hpp>
 #include <memory>
 #include <string>
-#include <functional>
+#include <iostream>
 
 struct Token : public boost::signals2::connection {
 
