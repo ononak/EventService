@@ -1,4 +1,4 @@
-# Basic EventService Model!
+# Simple EventService Model!
 
 
 
