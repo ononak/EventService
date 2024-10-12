@@ -1,14 +1,42 @@
-cmake_minimum_required(VERSION 3.0.0)
+cmake_minimum_required(VERSION 3.20.0)
 project(EvSer VERSION 0.1.0)
-set (CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 
-find_package(Boost COMPONENTS) 
+file(GLOB APP_SRC "bin/*.cpp")
+file(GLOB PROJ_SRC "src/*.cpp")
+file(GLOB TEST_SRC "test/*.cpp")
 
-if(Boost_FOUND)
-    include_directories(${Boost_INCLUDE_DIRS}) 
-    add_executable(EvSer main.cpp EventService.cpp Subscriber.cpp)
-    target_link_libraries(EvSer ${Boost_LIBRARIES})
-endif()
+include(CTest)
+include(FetchContent)
+################################
+# Google Test Framework
+################################
+find_package(PkgConfig)
+pkg_search_module(GTEST REQUIRED gtest_main)
+enable_testing()
+include_directories(${GTEST_INCLUDE_DIRS})
+
+#----------------------------------------------------------------
+# Application
+#----------------------------------------------------------------
+add_executable(EvSer ./bin/EvServiceApp.cpp ${PROJ_SRC})
+target_link_libraries(EvSer)
+
+
+#----------------------------------------------------------------
+# Unit Tests
+#----------------------------------------------------------------
+add_executable( TestEventService ${TEST_SRC} ./src/Signal.cpp)
+target_link_libraries(
+    TestEventService
+    PRIVATE
+    ${GTEST_LDFLAGS}
+    gtest
+    gmock
+)
+
+include(GoogleTest)
+gtest_discover_tests(TestEventService)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
