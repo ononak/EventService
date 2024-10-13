@@ -19,10 +19,6 @@ private:
 
 private:
   static std::shared_ptr<EventService> instance;
-  std::map<Token, EventHandler> subscribers;
-  Notifier<std::shared_ptr<Event>> notifier;
-  std::mutex eventLoopMutex;
-
 public:
   static std::shared_ptr<EventService> get();
   virtual ~EventService();
