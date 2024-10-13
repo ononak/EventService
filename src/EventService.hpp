@@ -13,7 +13,7 @@ using EventHandler = Notifier<std::shared_ptr<Event>>::subscriber_function;
 
 typedef std::string EventChannel;
 
-class EventService {
+class EventService : public Notifier<std::shared_ptr<Event>> {
 private:
   EventService();
 
@@ -26,9 +26,6 @@ private:
 public:
   static std::shared_ptr<EventService> get();
   virtual ~EventService();
-  void publish(const std::shared_ptr<Event>& message);
-  Token subscribe(const EventHandler &handler);
-  void unsubscribe(Token token);
   void run();
 };
 

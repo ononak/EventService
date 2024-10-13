@@ -1,6 +1,5 @@
 
 #include "Event.hpp"
-#include <iostream>
 
 namespace es {
 
@@ -12,7 +11,7 @@ Event::Event(const char *data, unsigned int length) {
 
 Event::Event() { _event_data = std::make_tuple(nullptr, 0); };
 
-Event::~Event() {  };
+Event::~Event(){};
 
 const EventData &Event::get_event_data() const { return _event_data; }
 } // namespace es

@@ -2,7 +2,6 @@
 #define SIGNAL_HPP
 
 #include <functional>
-#include <iostream>
 #include <map>
 #include <mutex>
 #include <string>
