@@ -1,4 +1,4 @@
-#include "../src/Signal.hpp"
+#include "../src/EventService/Signal.hpp"
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 /**
@@ -39,7 +39,7 @@ auto fnc = [](const int &data) { const_cast<int &>(data)++; };
  */
 TEST(SignalTest, ConnectDisconnectFuction_with_LambdaExp) {
 
-  es::Signal<int> signal;
+  es::Signal<int > signal;
   std::vector<es::Token> tokens;
   const int N = 5;
 

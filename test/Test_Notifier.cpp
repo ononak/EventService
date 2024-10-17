@@ -1,5 +1,5 @@
 
-#include "../src/Notifier.hpp"
+#include "../src/EventService/Notifier.hpp"
 #include <gtest/gtest.h>
 
 

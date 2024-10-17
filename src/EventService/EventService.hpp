@@ -4,7 +4,6 @@
 
 #include "Notifier.hpp"
 #include "Event.hpp"
-#include <map>
 #include <memory>
 
 namespace es {
